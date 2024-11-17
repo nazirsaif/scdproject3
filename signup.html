@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('public/images/2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-form {
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            color: #ffffff; 
+        }
+
+        .signup-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .signup-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #ffffff;
+        }
+
+        .password-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .signup-form input {
+            width: 100%;
+            padding: 10px;
+            padding-right: 40px; /* Space for the icon */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .password-container .toggle-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.7;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .password-container .toggle-icon:hover {
+            opacity: 1;
+        }
+
+        .signup-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .signup-form button:hover {
+            background-color: #005bb5;
+        }
+
+        .error {
+            color: #ff6666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-form">
+        <h2>Sign Up</h2>
+        <form id="signupForm" action="http://localhost:3001/signup" method="POST" onsubmit="return validateForm(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required>
+                <span class="toggle-icon" onclick="togglePasswordVisibility('password')">👁️</span>
+            </div>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="toggle-icon" onclick="togglePasswordVisibility('confirmPassword')">👁️</span>
+            </div>
+
+            <button type="submit">Register</button>
+            <p id="error-message" class="error"></p>
+        </form>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            errorMessage.textContent = '';  // Clear previous error message
+    
+            // Name validation (only alphabets)
+            const namePattern = /^[A-Za-z\s]+$/;
+            if (!namePattern.test(name)) {
+                errorMessage.textContent = 'Name must only contain alphabets.';
+                return false;
+            }
+    
+            // Username validation (must contain both numbers and alphabets)
+            const usernamePattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+            if (!usernamePattern.test(username)) {
+                errorMessage.textContent = 'Username must contain both numbers and alphabets.';
+                return false;
+            }
+    
+            // Email validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                errorMessage.textContent = 'Please enter a valid email address (e.g., xyz@gmail.com).';
+                return false;
+            }
+    
+            // Password validation (at least 8 characters, one uppercase letter, one number)
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordPattern.test(password)) {
+                errorMessage.textContent = 'Password must be at least 8 characters long, contain one uppercase letter, and one number.';
+                return false;
+            }
+    
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Passwords do not match.';
+                return false;
+            }
+    
+            // On successful validation, submit the form using AJAX to prevent page reload
+            event.preventDefault();  // Prevent form submission
+            submitForm(name, email, password, username);  // Call AJAX function
+        }
+    
+        function submitForm(name, email, password, username) {
+            const data = { name, email, password, username };
+    
+            // Send data via AJAX
+            fetch('http://localhost:3001/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    window.location.href = "login.html";  // Redirect to login page after successful registration
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field.type === 'password') {
+                field.type = 'text';
+            } else {
+                field.type = 'password';
+            }
+        }
+    </script>
+    
+</body>
+</html>

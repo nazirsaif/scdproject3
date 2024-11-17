@@ -1,0 +1,266 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    background-color: #007acc;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: #ff6b35;
+}
+
+/* Main Section */
+main {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Auth Container */
+.auth-container {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-top: 50px;
+}
+
+.auth-container h2 {
+    color: #007acc;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.auth-container label {
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+    color: #555;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.auth-container input:focus {
+    border-color: #007acc;
+}
+
+.auth-container button {
+    width: 100%;
+    background-color: #007acc;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.auth-container button:hover {
+    background-color: #005ea1;
+}
+
+/* Footer */
+ /* footer {
+    background-color: #f1f1f1;
+    color: #666;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    position: fixed;
+    bottom: 0;
+} */ 
+
+/* Responsive */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+}
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Button Styling */
+button {
+    background-color: #007acc;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005ea1;
+}
+
+/* Weather Image Styling */
+.weather-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px; 
+    margin-top: 10px;
+}
+/* Background for entire page */
+body {
+    background-image: url('images/2.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url('images/2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: -1;
+}
+
+h1, h2, p {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); 
+}
+
+
+/* General Styles */
+main {
+    padding: 20px;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #007BFF;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  form input, form button {
+    margin: 5px 0;
+    padding: 10px;
+    width: 300px;
+    font-size: 1rem;
+  }
+  
+  form button {
+    background-color: #007BFF;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #actions button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #weather-display {
+    background-color: #F9F9F9;
+    padding: 20px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px auto;
+    width: 50%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    form input, form button {
+      width: 90%;
+    }
+  
+    #weather-display {
+      width: 90%;
+    }
+  }
+  
